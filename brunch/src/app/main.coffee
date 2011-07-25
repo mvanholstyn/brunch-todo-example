@@ -4,7 +4,7 @@ $(document).ready ->
   app.templates =
     home: require('templates/home')
     todos:
-      _new:  require('templates/todos/new')
+      new:  require('templates/todos/new')
       stats: require('templates/todos/stats')
       todo:  require('templates/todos/todo')
       todos: require('templates/todos/todos')
@@ -21,7 +21,7 @@ $(document).ready ->
   app.views =
     home: require('views/home').Home
     todos: 
-      _new: require('views/todos/new').New
+      new: require('views/todos/new').New
       all: require('views/todos/all').All
       # undone: require('views/todos/undone').Undone
       # done: require('views/todos/done').Done

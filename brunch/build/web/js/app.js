@@ -10879,9 +10879,19 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       Main.__super__.constructor.apply(this, arguments);
     }
     Main.prototype.routes = {
-      "all": "all"
+      "all": "all",
+      "done": "done",
+      "undone": "undone"
     };
     Main.prototype.all = function() {
+      new app.views.home().render();
+      return app.collections.todos.fetch();
+    };
+    Main.prototype.done = function() {
+      new app.views.home().render();
+      return app.collections.todos.fetch();
+    };
+    Main.prototype.undone = function() {
       new app.views.home().render();
       return app.collections.todos.fetch();
     };
@@ -10894,7 +10904,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     app.templates = {
       home: require('templates/home'),
       todos: {
-        _new: require('templates/todos/new'),
+        "new": require('templates/todos/new'),
         stats: require('templates/todos/stats'),
         todo: require('templates/todos/todo'),
         todos: require('templates/todos/todos')
@@ -10912,7 +10922,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     app.views = {
       home: require('views/home').Home,
       todos: {
-        _new: require('views/todos/new').New,
+        "new": require('views/todos/new').New,
         all: require('views/todos/all').All,
         todo: require('views/todos/todo').Todo,
         stats: require('views/todos/stats').Stats
@@ -11230,7 +11240,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     Home.prototype.el = '#home-view';
     Home.prototype.render = function() {
       this.$(this.el).html(app.templates.home());
-      this.$(this.el).find('#todo-app').append(new app.views.todos._new().render().el);
+      this.$(this.el).find('#todo-app').append(new app.views.todos["new"]().render().el);
       this.$(this.el).find('#todo-app').append(new app.views.todos.all().render().el);
       this.$(this.el).find('#todo-app').append(new app.views.todos.stats().render().el);
       return this;
@@ -11339,7 +11349,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       'keyup #new-todo': 'showHint'
     };
     New.prototype.render = function() {
-      this.$(this.el).html(app.templates.todos._new());
+      this.$(this.el).html(app.templates.todos["new"]());
       return this;
     };
     New.prototype.newAttributes = function() {
