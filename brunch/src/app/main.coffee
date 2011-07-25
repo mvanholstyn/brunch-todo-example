@@ -2,7 +2,7 @@ window.app = {}
 
 $(document).ready ->
   app.templates =
-    home: require('templates/home')
+    layout: require('templates/layout')
     todos:
       new:  require('templates/todos/new')
       stats: require('templates/todos/stats')
@@ -19,7 +19,7 @@ $(document).ready ->
     todos: new (require('controllers/todos').Todos)()
 
   app.views =
-    home: require('views/home').Home
+    layout: require('views/layout').Layout
     todos: 
       new: require('views/todos/new').New
       all: require('views/todos/all').All

@@ -10884,15 +10884,15 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       "todos/undone": "undone"
     };
     Todos.prototype.all = function() {
-      new app.views.home().render();
+      new app.views.layout().render();
       return app.collections.todos.fetch();
     };
     Todos.prototype.done = function() {
-      new app.views.home().render();
+      new app.views.layout().render();
       return app.collections.todos.fetch();
     };
     Todos.prototype.undone = function() {
-      new app.views.home().render();
+      new app.views.layout().render();
       return app.collections.todos.fetch();
     };
     return Todos;
@@ -10902,7 +10902,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   window.app = {};
   $(document).ready(function() {
     app.templates = {
-      home: require('templates/home'),
+      layout: require('templates/layout'),
       todos: {
         "new": require('templates/todos/new'),
         stats: require('templates/todos/stats'),
@@ -10920,7 +10920,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       todos: new (require('controllers/todos').Todos)()
     };
     app.views = {
-      home: require('views/home').Home,
+      layout: require('views/layout').Layout,
       todos: {
         "new": require('views/todos/new').New,
         all: require('views/todos/all').All,
@@ -10963,7 +10963,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     return Todo;
   })();
 }).call(this);
-}, "templates/home": function(exports, require, module) {module.exports = function(__obj) {
+}, "templates/layout": function(exports, require, module) {module.exports = function(__obj) {
   if (!__obj) __obj = {};
   var __out = [], __capture = function(callback) {
     var out = __out, result;
@@ -11223,7 +11223,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   }).call(__obj);
   __obj.safe = __objSafe, __obj.escape = __escape;
   return __out.join('');
-}}, "views/home": function(exports, require, module) {(function() {
+}}, "views/layout": function(exports, require, module) {(function() {
   var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -11232,20 +11232,20 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     child.__super__ = parent.prototype;
     return child;
   };
-  exports.Home = (function() {
-    __extends(Home, Backbone.View);
-    function Home() {
-      Home.__super__.constructor.apply(this, arguments);
+  exports.Layout = (function() {
+    __extends(Layout, Backbone.View);
+    function Layout() {
+      Layout.__super__.constructor.apply(this, arguments);
     }
-    Home.prototype.el = '#home-view';
-    Home.prototype.render = function() {
-      this.$(this.el).html(app.templates.home());
+    Layout.prototype.el = '#home-view';
+    Layout.prototype.render = function() {
+      this.$(this.el).html(app.templates.layout());
       this.$(this.el).find('#todo-app').append(new app.views.todos["new"]().render().el);
       this.$(this.el).find('#todo-app').append(new app.views.todos.all().render().el);
       this.$(this.el).find('#todo-app').append(new app.views.todos.stats().render().el);
       return this;
     };
-    return Home;
+    return Layout;
   })();
 }).call(this);
 }, "views/todos/all": function(exports, require, module) {(function() {

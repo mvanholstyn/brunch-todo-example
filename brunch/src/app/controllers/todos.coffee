@@ -5,13 +5,13 @@ class exports.Todos extends Backbone.Controller
     "todos/undone": "undone"
 
   all: ->
-    new app.views.home().render()
+    new app.views.layout().render()
     app.collections.todos.fetch()
   
   done: ->
-    new app.views.home().render()
+    new app.views.layout().render()
     app.collections.todos.fetch()
   
   undone: ->
-    new app.views.home().render()
+    new app.views.layout().render()
     app.collections.todos.fetch()
