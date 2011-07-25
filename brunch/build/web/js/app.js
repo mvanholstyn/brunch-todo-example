@@ -10943,8 +10943,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       });
     };
     Todo.prototype.clear = function() {
-      this.destroy();
-      return this.view.remove();
+      return this.destroy();
     };
     return Todo;
   })();
@@ -11361,8 +11360,9 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       'keypress .todo-input': 'updateOnEnter'
     };
     TodoView.prototype.initialize = function() {
+      _.bindAll(this, "remove");
       this.model.bind('change', this.render);
-      return this.model.view = this;
+      return this.model.bind('destroy', this.remove);
     };
     TodoView.prototype.render = function() {
       this.$(this.el).html(todoTemplate({

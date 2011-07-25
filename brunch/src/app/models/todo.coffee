@@ -9,4 +9,3 @@ class exports.Todo extends Backbone.Model
 
   clear: ->
     @destroy()
-    @view.remove()

@@ -11,8 +11,10 @@ class exports.TodoView extends Backbone.View
     'keypress .todo-input'   : 'updateOnEnter'
 
   initialize: ->
+    _.bindAll(this, "remove")
+
     @model.bind('change', @render)
-    @model.view = @
+    @model.bind('destroy', @remove)
 
   render: =>
     @$(@el).html(todoTemplate(todo: @model.toJSON()))
