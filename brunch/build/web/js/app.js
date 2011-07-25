@@ -10873,19 +10873,19 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     child.__super__ = parent.prototype;
     return child;
   };
-  exports.MainController = (function() {
-    __extends(MainController, Backbone.Controller);
-    function MainController() {
-      MainController.__super__.constructor.apply(this, arguments);
+  exports.Main = (function() {
+    __extends(Main, Backbone.Controller);
+    function Main() {
+      Main.__super__.constructor.apply(this, arguments);
     }
-    MainController.prototype.routes = {
+    Main.prototype.routes = {
       "all": "all"
     };
-    MainController.prototype.all = function() {
+    Main.prototype.all = function() {
       new app.views.home().render();
       return app.collections.todos.fetch();
     };
-    return MainController;
+    return Main;
   })();
 }).call(this);
 }, "main": function(exports, require, module) {(function() {
@@ -10907,7 +10907,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       todos: new (require('collections/todos').Todos)()
     };
     app.controllers = {
-      main: new (require('controllers/main').MainController)()
+      main: new (require('controllers/main').Main)()
     };
     app.views = {
       home: require('views/home').HomeView,

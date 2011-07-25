@@ -16,7 +16,7 @@ $(document).ready ->
     todos: new (require('collections/todos').Todos)()
 
   app.controllers =
-    main: new (require('controllers/main').MainController)()
+    main: new (require('controllers/main').Main)()
 
   app.views =
     home: require('views/home').HomeView

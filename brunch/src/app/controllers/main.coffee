@@ -1,4 +1,4 @@
-class exports.MainController extends Backbone.Controller
+class exports.Main extends Backbone.Controller
   routes :
     "all": "all",
     # "done": "done"
