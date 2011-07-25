@@ -23,8 +23,8 @@ $(document).ready ->
     todos: 
       new: require('views/todos/new').New
       all: require('views/todos/all').All
-      # undone: require('views/todos/undone').Undone
-      # done: require('views/todos/done').Done
+      undone: require('views/todos/undone').Undone
+      done: require('views/todos/done').Done
       todo: require('views/todos/todo').Todo
       stats: require('views/todos/stats').Stats
       

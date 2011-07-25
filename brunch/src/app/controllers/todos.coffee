@@ -5,13 +5,16 @@ class exports.Todos extends Backbone.Controller
     "todos/undone": "undone"
 
   all: ->
-    new app.views.layout().render()
+    layout = new app.views.layout().render()
+    $(layout.el).find('#todo-app').append new app.views.todos.all().render().el
     app.collections.todos.fetch()
   
   done: ->
-    new app.views.layout().render()
+    layout = new app.views.layout().render()
+    $(layout.el).find('#todo-app').append new app.views.todos.done().render().el
     app.collections.todos.fetch()
   
   undone: ->
-    new app.views.layout().render()
+    layout = new app.views.layout().render()
+    $(layout.el).find('#todo-app').append new app.views.todos.undone().render().el
     app.collections.todos.fetch()

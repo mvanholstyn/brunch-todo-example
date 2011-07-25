@@ -10884,15 +10884,21 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       "todos/undone": "undone"
     };
     Todos.prototype.all = function() {
-      new app.views.layout().render();
+      var layout;
+      layout = new app.views.layout().render();
+      $(layout.el).find('#todo-app').append(new app.views.todos.all().render().el);
       return app.collections.todos.fetch();
     };
     Todos.prototype.done = function() {
-      new app.views.layout().render();
+      var layout;
+      layout = new app.views.layout().render();
+      $(layout.el).find('#todo-app').append(new app.views.todos.done().render().el);
       return app.collections.todos.fetch();
     };
     Todos.prototype.undone = function() {
-      new app.views.layout().render();
+      var layout;
+      layout = new app.views.layout().render();
+      $(layout.el).find('#todo-app').append(new app.views.todos.undone().render().el);
       return app.collections.todos.fetch();
     };
     return Todos;
@@ -10924,6 +10930,8 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       todos: {
         "new": require('views/todos/new').New,
         all: require('views/todos/all').All,
+        undone: require('views/todos/undone').Undone,
+        done: require('views/todos/done').Done,
         todo: require('views/todos/todo').Todo,
         stats: require('views/todos/stats').Stats
       }
@@ -11241,8 +11249,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     Layout.prototype.render = function() {
       this.$(this.el).html(app.templates.layout());
       this.$(this.el).find('#todo-app').append(new app.views.todos["new"]().render().el);
-      this.$(this.el).find('#todo-app').append(new app.views.todos.all().render().el);
-      this.$(this.el).find('#todo-app').append(new app.views.todos.stats().render().el);
       return this;
     };
     return Layout;
@@ -11298,7 +11304,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   exports.Done = (function() {
     __extends(Done, Backbone.View);
     function Done() {
-      this.renderStats = __bind(this.renderStats, this);
       this.addAll = __bind(this.addAll, this);
       this.addOne = __bind(this.addOne, this);
       Done.__super__.constructor.apply(this, arguments);
@@ -11306,11 +11311,10 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     Done.prototype.id = 'todos-view';
     Done.prototype.initialize = function() {
       app.collections.todos.bind('add', this.addOne);
-      app.collections.todos.bind('refresh', this.addAll);
-      return app.collections.todos.bind('all', this.renderStats);
+      return app.collections.todos.bind('refresh', this.addAll);
     };
     Done.prototype.render = function() {
-      $(this.el).html(app.templates.todos());
+      $(this.el).html(app.templates.todos.todos());
       return this;
     };
     Done.prototype.addOne = function(todo) {
@@ -11321,10 +11325,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       return $(this.el).find("#todos").append(view.render().el);
     };
     Done.prototype.addAll = function() {
-      return app.collections.todos.done().each(this.addOne);
-    };
-    Done.prototype.renderStats = function() {
-      return app.views.todos.stats.render();
+      return _.each(app.collections.todos.done(), this.addOne);
     };
     return Done;
   })();
@@ -11502,7 +11503,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   exports.Undone = (function() {
     __extends(Undone, Backbone.View);
     function Undone() {
-      this.renderStats = __bind(this.renderStats, this);
       this.addAll = __bind(this.addAll, this);
       this.addOne = __bind(this.addOne, this);
       Undone.__super__.constructor.apply(this, arguments);
@@ -11510,11 +11510,10 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     Undone.prototype.id = 'todos-view';
     Undone.prototype.initialize = function() {
       app.collections.todos.bind('add', this.addOne);
-      app.collections.todos.bind('refresh', this.addAll);
-      return app.collections.todos.bind('all', this.renderStats);
+      return app.collections.todos.bind('refresh', this.addAll);
     };
     Undone.prototype.render = function() {
-      $(this.el).html(app.templates.todos());
+      $(this.el).html(app.templates.todos.todos());
       return this;
     };
     Undone.prototype.addOne = function(todo) {
@@ -11525,10 +11524,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       return $(this.el).find("#todos").append(view.render().el);
     };
     Undone.prototype.addAll = function() {
-      return app.collections.todos.remaining().each(this.addOne);
-    };
-    Undone.prototype.renderStats = function() {
-      return app.views.todos.stats.render();
+      return _.each(app.collections.todos.remaining(), this.addOne);
     };
     return Undone;
   })();
