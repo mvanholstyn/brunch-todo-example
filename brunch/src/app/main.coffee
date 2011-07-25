@@ -19,14 +19,14 @@ $(document).ready ->
     main: new (require('controllers/main').MainController)()
 
   app.views =
-    home: new (require('views/home').HomeView)()
+    home: require('views/home').HomeView
     todos: 
-      _new: new (require('views/todos/new').NewTodoView)()
-      all: new (require('views/todos/all').TodosAllView)()
-      # undone: new (require('views/todos/undone').TodosUndoneView)()
-      # done: new (require('views/todos/done').TodosDoneView)()
+      _new: require('views/todos/new').NewTodoView
+      all: require('views/todos/all').TodosAllView
+      # undone: require('views/todos/undone').TodosUndoneView
+      # done: require('views/todos/done').TodosDoneView
       todo: require('views/todos/todo').TodoView
-      stats: new (require('views/todos/stats').StatsView)()
+      stats: require('views/todos/stats').StatsView
       
 
   Backbone.history.saveLocation("all") if Backbone.history.getFragment() is ''

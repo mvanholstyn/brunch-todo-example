@@ -5,7 +5,7 @@ class exports.MainController extends Backbone.Controller
     # "undone": "undone"
 
   all: ->
-    app.views.home.render()
+    new app.views.home().render()
     app.collections.todos.fetch()
   # 
   # done: ->

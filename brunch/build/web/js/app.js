@@ -10882,7 +10882,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       "all": "all"
     };
     MainController.prototype.all = function() {
-      app.views.home.render();
+      new app.views.home().render();
       return app.collections.todos.fetch();
     };
     return MainController;
@@ -10910,12 +10910,12 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       main: new (require('controllers/main').MainController)()
     };
     app.views = {
-      home: new (require('views/home').HomeView)(),
+      home: require('views/home').HomeView,
       todos: {
-        _new: new (require('views/todos/new').NewTodoView)(),
-        all: new (require('views/todos/all').TodosAllView)(),
+        _new: require('views/todos/new').NewTodoView,
+        all: require('views/todos/all').TodosAllView,
         todo: require('views/todos/todo').TodoView,
-        stats: new (require('views/todos/stats').StatsView)()
+        stats: require('views/todos/stats').StatsView
       }
     };
     if (Backbone.history.getFragment() === '') {
@@ -11230,9 +11230,9 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     HomeView.prototype.el = '#home-view';
     HomeView.prototype.render = function() {
       this.$(this.el).html(app.templates.home());
-      this.$(this.el).find('#todo-app').append(app.views.todos._new.render().el);
-      this.$(this.el).find('#todo-app').append(app.views.todos.all.render().el);
-      this.$(this.el).find('#todo-app').append(app.views.todos.stats.render().el);
+      this.$(this.el).find('#todo-app').append(new app.views.todos._new().render().el);
+      this.$(this.el).find('#todo-app').append(new app.views.todos.all().render().el);
+      this.$(this.el).find('#todo-app').append(new app.views.todos.stats().render().el);
       return this;
     };
     return HomeView;
@@ -11250,7 +11250,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   exports.TodosAllView = (function() {
     __extends(TodosAllView, Backbone.View);
     function TodosAllView() {
-      this.renderStats = __bind(this.renderStats, this);
       this.addAll = __bind(this.addAll, this);
       this.addOne = __bind(this.addOne, this);
       TodosAllView.__super__.constructor.apply(this, arguments);
@@ -11258,8 +11257,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     TodosAllView.prototype.id = 'todos-view';
     TodosAllView.prototype.initialize = function() {
       app.collections.todos.bind('add', this.addOne);
-      app.collections.todos.bind('refresh', this.addAll);
-      return app.collections.todos.bind('all', this.renderStats);
+      return app.collections.todos.bind('refresh', this.addAll);
     };
     TodosAllView.prototype.render = function() {
       $(this.el).html(app.templates.todos.todos());
@@ -11274,9 +11272,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     };
     TodosAllView.prototype.addAll = function() {
       return app.collections.todos.each(this.addOne);
-    };
-    TodosAllView.prototype.renderStats = function() {
-      return app.views.todos.stats.render();
     };
     return TodosAllView;
   })();
@@ -11400,6 +11395,10 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     StatsView.prototype.id = 'stats-view';
     StatsView.prototype.events = {
       'click .todo-clear a': 'clearCompleted'
+    };
+    StatsView.prototype.initialize = function() {
+      _.bindAll(this, "render");
+      return app.collections.todos.bind('all', this.render);
     };
     StatsView.prototype.render = function() {
       var data;

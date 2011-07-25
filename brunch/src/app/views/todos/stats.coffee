@@ -4,6 +4,10 @@ class exports.StatsView extends Backbone.View
   events:
     'click .todo-clear a' : 'clearCompleted'
 
+  initialize: ->
+    _.bindAll(this, "render")
+    app.collections.todos.bind 'all', @render
+
   render: ->
     data =
       total: app.collections.todos.length
