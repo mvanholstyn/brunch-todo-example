@@ -1,8 +1,6 @@
 TodoView = require('views/todos/todo').TodoView
-todosTemplate = require('templates/todos/todos')
 
 class exports.TodosAllView extends Backbone.View
-
   id: 'todos-view'
 
   initialize: ->
@@ -11,7 +9,7 @@ class exports.TodosAllView extends Backbone.View
     app.collections.todos.bind 'all', @renderStats
 
   render: ->
-    $(@el).html todosTemplate()
+    $(@el).html app.templates.todos.todos()
     @
 
   addOne: (todo) =>

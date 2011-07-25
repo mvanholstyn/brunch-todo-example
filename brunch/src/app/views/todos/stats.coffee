@@ -1,7 +1,4 @@
-statsTemplate = require('templates/todos/stats')
-
 class exports.StatsView extends Backbone.View
-
   id: 'stats-view'
 
   events:
@@ -13,7 +10,7 @@ class exports.StatsView extends Backbone.View
       done: app.collections.todos.done().length
       remaining: app.collections.todos.remaining().length
 
-    @$(@el).html(statsTemplate(stats: data))
+    @$(@el).html(app.templates.todos.stats(stats: data))
     @
 
   clearCompleted: ->

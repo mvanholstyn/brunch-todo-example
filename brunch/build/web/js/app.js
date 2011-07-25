@@ -10881,19 +10881,9 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       MainController.__super__.constructor.apply(this, arguments);
     }
     MainController.prototype.routes = {
-      "all": "all",
-      "done": "done",
-      "undone": "undone"
+      "all": "all"
     };
     MainController.prototype.all = function() {
-      app.views.home.render();
-      return app.collections.todos.fetch();
-    };
-    MainController.prototype.done = function() {
-      app.views.home.render();
-      return app.collections.todos.fetch();
-    };
-    MainController.prototype.undone = function() {
       app.views.home.render();
       return app.collections.todos.fetch();
     };
@@ -10903,9 +10893,10 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
 }, "main": function(exports, require, module) {(function() {
   var HomeView, MainController, NewTodoView, StatsView, Todos, TodosAllView, TodosDoneView, TodosUndoneView, todos;
   window.app = {};
-  app.controllers = {};
+  app.templates = {};
   app.models = {};
   app.collections = {};
+  app.controllers = {};
   app.views = todos = {};
   Todos = require('collections/todos').Todos;
   MainController = require('controllers/main').MainController;
@@ -10917,6 +10908,15 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   StatsView = require('views/todos/stats').StatsView;
   $(document).ready(function() {
     app.initialize = function() {
+      app.templates = {
+        home: require('templates/home'),
+        todos: {
+          _new: require('templates/todos/new'),
+          stats: require('templates/todos/stats'),
+          todo: require('templates/todos/todo'),
+          todos: require('templates/todos/todos')
+        }
+      };
       app.collections.todos = new Todos();
       app.controllers.main = new MainController();
       app.views.home = new HomeView();
@@ -11223,7 +11223,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   __obj.safe = __objSafe, __obj.escape = __escape;
   return __out.join('');
 }}, "views/home": function(exports, require, module) {(function() {
-  var homeTemplate;
   var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -11232,7 +11231,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     child.__super__ = parent.prototype;
     return child;
   };
-  homeTemplate = require('templates/home');
   exports.HomeView = (function() {
     __extends(HomeView, Backbone.View);
     function HomeView() {
@@ -11240,7 +11238,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     }
     HomeView.prototype.el = '#home-view';
     HomeView.prototype.render = function() {
-      this.$(this.el).html(homeTemplate());
+      this.$(this.el).html(app.templates.home());
       this.$(this.el).find('#todo-app').append(app.views.todos._new.render().el);
       this.$(this.el).find('#todo-app').append(app.views.todos.all.render().el);
       this.$(this.el).find('#todo-app').append(app.views.todos.stats.render().el);
@@ -11250,7 +11248,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   })();
 }).call(this);
 }, "views/todos/all": function(exports, require, module) {(function() {
-  var TodoView, todosTemplate;
+  var TodoView;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -11260,7 +11258,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     return child;
   };
   TodoView = require('views/todos/todo').TodoView;
-  todosTemplate = require('templates/todos/todos');
   exports.TodosAllView = (function() {
     __extends(TodosAllView, Backbone.View);
     function TodosAllView() {
@@ -11276,7 +11273,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       return app.collections.todos.bind('all', this.renderStats);
     };
     TodosAllView.prototype.render = function() {
-      $(this.el).html(todosTemplate());
+      $(this.el).html(app.templates.todos.todos());
       return this;
     };
     TodosAllView.prototype.addOne = function(todo) {
@@ -11296,7 +11293,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   })();
 }).call(this);
 }, "views/todos/done": function(exports, require, module) {(function() {
-  var TodoView, todosTemplate;
+  var TodoView;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -11306,7 +11303,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     return child;
   };
   TodoView = require('views/todos/todo').TodoView;
-  todosTemplate = require('templates/todos/todos');
   exports.TodosDoneView = (function() {
     __extends(TodosDoneView, Backbone.View);
     function TodosDoneView() {
@@ -11322,7 +11318,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       return app.collections.todos.bind('all', this.renderStats);
     };
     TodosDoneView.prototype.render = function() {
-      $(this.el).html(todosTemplate());
+      $(this.el).html(app.templates.todos());
       return this;
     };
     TodosDoneView.prototype.addOne = function(todo) {
@@ -11342,7 +11338,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   })();
 }).call(this);
 }, "views/todos/new": function(exports, require, module) {(function() {
-  var newTodoTemplate;
   var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -11351,7 +11346,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     child.__super__ = parent.prototype;
     return child;
   };
-  newTodoTemplate = require('templates/todos/new');
   exports.NewTodoView = (function() {
     __extends(NewTodoView, Backbone.View);
     function NewTodoView() {
@@ -11363,7 +11357,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       'keyup #new-todo': 'showHint'
     };
     NewTodoView.prototype.render = function() {
-      this.$(this.el).html(newTodoTemplate());
+      this.$(this.el).html(app.templates.todos._new());
       return this;
     };
     NewTodoView.prototype.newAttributes = function() {
@@ -11403,7 +11397,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   })();
 }).call(this);
 }, "views/todos/stats": function(exports, require, module) {(function() {
-  var statsTemplate;
   var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -11412,7 +11405,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     child.__super__ = parent.prototype;
     return child;
   };
-  statsTemplate = require('templates/todos/stats');
   exports.StatsView = (function() {
     __extends(StatsView, Backbone.View);
     function StatsView() {
@@ -11429,7 +11421,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
         done: app.collections.todos.done().length,
         remaining: app.collections.todos.remaining().length
       };
-      this.$(this.el).html(statsTemplate({
+      this.$(this.el).html(app.templates.todos.stats({
         stats: data
       }));
       return this;
@@ -11441,7 +11433,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   })();
 }).call(this);
 }, "views/todos/todo": function(exports, require, module) {(function() {
-  var todoTemplate;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -11450,7 +11441,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     child.__super__ = parent.prototype;
     return child;
   };
-  todoTemplate = require('templates/todos/todo');
   exports.TodoView = (function() {
     __extends(TodoView, Backbone.View);
     function TodoView() {
@@ -11471,7 +11461,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       return this.model.bind('destroy', this.remove);
     };
     TodoView.prototype.render = function() {
-      this.$(this.el).html(todoTemplate({
+      this.$(this.el).html(app.templates.todos.todo({
         todo: this.model.toJSON()
       }));
       this.$('.todo-input').bind('blur', this.update);
@@ -11505,7 +11495,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   })();
 }).call(this);
 }, "views/todos/undone": function(exports, require, module) {(function() {
-  var TodoView, todosTemplate;
+  var TodoView;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; }, __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -11515,7 +11505,6 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     return child;
   };
   TodoView = require('views/todos/todo').TodoView;
-  todosTemplate = require('templates/todos/todos');
   exports.TodosUndoneView = (function() {
     __extends(TodosUndoneView, Backbone.View);
     function TodosUndoneView() {
@@ -11531,7 +11520,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       return app.collections.todos.bind('all', this.renderStats);
     };
     TodosUndoneView.prototype.render = function() {
-      $(this.el).html(todosTemplate());
+      $(this.el).html(app.templates.todos());
       return this;
     };
     TodosUndoneView.prototype.addOne = function(todo) {

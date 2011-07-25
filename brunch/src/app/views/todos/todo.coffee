@@ -1,7 +1,4 @@
-todoTemplate = require('templates/todos/todo')
-
 class exports.TodoView extends Backbone.View
-
   tagName:  "li"
 
   events:
@@ -17,7 +14,7 @@ class exports.TodoView extends Backbone.View
     @model.bind('destroy', @remove)
 
   render: =>
-    @$(@el).html(todoTemplate(todo: @model.toJSON()))
+    @$(@el).html(app.templates.todos.todo(todo: @model.toJSON()))
     # Bind event directly to input, cause older browsers doesn't
     # support this event on several types of elements.
     # Originally, this event was only applicable to form elements.

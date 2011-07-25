@@ -1,7 +1,4 @@
-newTodoTemplate = require('templates/todos/new')
-
 class exports.NewTodoView extends Backbone.View
-
   id: 'new-todo-view'
 
   events:
@@ -9,7 +6,7 @@ class exports.NewTodoView extends Backbone.View
     'keyup #new-todo'     : 'showHint'
 
   render: ->
-    @$(@el).html newTodoTemplate()
+    @$(@el).html app.templates.todos._new()
     @
 
   newAttributes: ->

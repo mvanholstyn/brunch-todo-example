@@ -1,7 +1,8 @@
 window.app = {}
-app.controllers = {}
+app.templates = {}
 app.models = {}
 app.collections = {}
+app.controllers = {}
 app.views = 
   todos = {}
 
@@ -18,6 +19,14 @@ StatsView = require('views/todos/stats').StatsView
 
 $(document).ready ->
   app.initialize = ->
+    app.templates =
+      home: require('templates/home')
+      todos:
+        _new:  require('templates/todos/new')
+        stats: require('templates/todos/stats')
+        todo:  require('templates/todos/todo')
+        todos: require('templates/todos/todos')
+        
     app.collections.todos = new Todos()
 
     app.controllers.main = new MainController()
@@ -33,3 +42,30 @@ $(document).ready ->
     Backbone.history.saveLocation("all") if Backbone.history.getFragment() is ''
   app.initialize()
   Backbone.history.start()
+
+
+
+# window.app = {}
+# 
+# $(document).ready ->
+#   app.controllers =
+#     main: new require('controllers/main').MainController()
+# 
+#   app.models =
+#     todo: require('models/todo').Todo
+# 
+#   app.collections =
+#     todos: new require('collections/todos').Todos()
+# 
+#   app.views =
+#     home: new require('views/home').HomeView()
+#     todos:
+#       _new: new require('views/todos/new').NewTodoView()
+#       all: new require('views/todos/all').TodosAllView()
+#       # undone: new require('views/todos/undone').TodosUndoneView()
+#       # done: new require('views/todos/done').TodosDoneView()
+#       stats: new require('views/todos/stats').StatsView()
+# 
+# 
+#   Backbone.history.saveLocation("all") if Backbone.history.getFragment() is ''
+#   Backbone.history.start()
