@@ -1,4 +1,4 @@
-class exports.NewTodoView extends Backbone.View
+class exports.New extends Backbone.View
   id: 'new-todo-view'
 
   events:

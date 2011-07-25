@@ -1,4 +1,4 @@
-class exports.StatsView extends Backbone.View
+class exports.Stats extends Backbone.View
   id: 'stats-view'
 
   events:

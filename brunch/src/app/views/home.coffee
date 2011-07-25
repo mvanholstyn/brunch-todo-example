@@ -1,4 +1,4 @@
-class exports.HomeView extends Backbone.View
+class exports.Home extends Backbone.View
   el: '#home-view'
 
   render: ->

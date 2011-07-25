@@ -1,4 +1,4 @@
-class exports.TodosDoneView extends Backbone.View
+class exports.Done extends Backbone.View
   id: 'todos-view'
 
   initialize: ->

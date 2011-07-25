@@ -1,4 +1,4 @@
-class exports.TodoView extends Backbone.View
+class exports.Todo extends Backbone.View
   tagName:  "li"
 
   events:
