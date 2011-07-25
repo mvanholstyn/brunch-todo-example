@@ -1,8 +1,5 @@
-Todo = require('models/todo').Todo
-
 class exports.Todos extends Backbone.Collection
-
-  model: Todo
+  model: app.models.todo
 
   initialize: ->
     @localStorage = new Store "todos"

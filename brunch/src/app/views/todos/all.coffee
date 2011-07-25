@@ -1,5 +1,3 @@
-TodoView = require('views/todos/todo').TodoView
-
 class exports.TodosAllView extends Backbone.View
   id: 'todos-view'
 
@@ -13,7 +11,7 @@ class exports.TodosAllView extends Backbone.View
     @
 
   addOne: (todo) =>
-    view = new TodoView model: todo
+    view = new app.views.todos.todo model: todo
     $(@el).find("#todos").append view.render().el
 
   addAll: =>
