@@ -1,8 +1,8 @@
-class exports.Main extends Backbone.Controller
+class exports.Todos extends Backbone.Controller
   routes :
-    "all": "all",
-    "done": "done"
-    "undone": "undone"
+    "todos/all": "all",
+    "todos/done": "done"
+    "todos/undone": "undone"
 
   all: ->
     new app.views.home().render()

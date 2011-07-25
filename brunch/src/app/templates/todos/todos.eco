@@ -1,2 +1,2 @@
-<a href="#all">All</a> | <a href="#undone">Undone</a> | <a href="#done">Done</a>
+<a href="#todos/all">All</a> | <a href="#todos/undone">Undone</a> | <a href="#todos/done">Done</a>
 <ul id="todos"></ul>

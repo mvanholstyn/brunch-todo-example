@@ -10864,7 +10864,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     return Todos;
   })();
 }).call(this);
-}, "controllers/main": function(exports, require, module) {(function() {
+}, "controllers/todos": function(exports, require, module) {(function() {
   var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -10873,29 +10873,29 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
     child.__super__ = parent.prototype;
     return child;
   };
-  exports.Main = (function() {
-    __extends(Main, Backbone.Controller);
-    function Main() {
-      Main.__super__.constructor.apply(this, arguments);
+  exports.Todos = (function() {
+    __extends(Todos, Backbone.Controller);
+    function Todos() {
+      Todos.__super__.constructor.apply(this, arguments);
     }
-    Main.prototype.routes = {
-      "all": "all",
-      "done": "done",
-      "undone": "undone"
+    Todos.prototype.routes = {
+      "todos/all": "all",
+      "todos/done": "done",
+      "todos/undone": "undone"
     };
-    Main.prototype.all = function() {
+    Todos.prototype.all = function() {
       new app.views.home().render();
       return app.collections.todos.fetch();
     };
-    Main.prototype.done = function() {
+    Todos.prototype.done = function() {
       new app.views.home().render();
       return app.collections.todos.fetch();
     };
-    Main.prototype.undone = function() {
+    Todos.prototype.undone = function() {
       new app.views.home().render();
       return app.collections.todos.fetch();
     };
-    return Main;
+    return Todos;
   })();
 }).call(this);
 }, "main": function(exports, require, module) {(function() {
@@ -10917,7 +10917,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       todos: new (require('collections/todos').Todos)()
     };
     app.controllers = {
-      main: new (require('controllers/main').Main)()
+      todos: new (require('controllers/todos').Todos)()
     };
     app.views = {
       home: require('views/home').Home,
@@ -10929,7 +10929,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
       }
     };
     if (Backbone.history.getFragment() === '') {
-      Backbone.history.saveLocation("all");
+      Backbone.history.saveLocation("todos/all");
     }
     return Backbone.history.start();
   });
@@ -11217,7 +11217,7 @@ i.rotate(null)}:function(){t=j.selected;n()});if(c){this.element.bind("tabsshow"
   }
   (function() {
     (function() {
-      __out.push('<a href="#all">All</a> | <a href="#undone">Undone</a> | <a href="#done">Done</a>\n<ul id="todos"></ul>\n');
+      __out.push('<a href="#todos/all">All</a> | <a href="#todos/undone">Undone</a> | <a href="#todos/done">Done</a>\n<ul id="todos"></ul>\n');
     }).call(this);
     
   }).call(__obj);

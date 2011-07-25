@@ -16,7 +16,7 @@ $(document).ready ->
     todos: new (require('collections/todos').Todos)()
 
   app.controllers =
-    main: new (require('controllers/main').Main)()
+    todos: new (require('controllers/todos').Todos)()
 
   app.views =
     home: require('views/home').Home
@@ -29,5 +29,5 @@ $(document).ready ->
       stats: require('views/todos/stats').Stats
       
 
-  Backbone.history.saveLocation("all") if Backbone.history.getFragment() is ''
+  Backbone.history.saveLocation("todos/all") if Backbone.history.getFragment() is ''
   Backbone.history.start()
