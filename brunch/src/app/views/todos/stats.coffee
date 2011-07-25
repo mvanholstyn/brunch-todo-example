@@ -1,4 +1,4 @@
-statsTemplate = require('templates/stats')
+statsTemplate = require('templates/todos/stats')
 
 class exports.StatsView extends Backbone.View
 

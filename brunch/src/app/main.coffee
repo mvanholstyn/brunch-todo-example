@@ -4,13 +4,14 @@ app.models = {}
 app.collections = {}
 app.views = {}
 
-Todos = require('collections/todos_collection').Todos
-MainController = require('controllers/main_controller').MainController
-HomeView = require('views/home_view').HomeView
-NewTodoView = require('views/new_todo_view').NewTodoView
-TodosView = require('views/todos_view').TodosView
-StatsView = require('views/stats_view').StatsView
-TodoView = require('views/todos_view').TodoView
+Todos = require('collections/todos').Todos
+
+MainController = require('controllers/main').MainController
+
+HomeView = require('views/home').HomeView
+NewTodoView = require('views/todos/new').NewTodoView
+TodosView = require('views/todos/todos').TodosView
+StatsView = require('views/todos/stats').StatsView
 
 # app bootstrapping on document ready
 $(document).ready ->
@@ -18,6 +19,7 @@ $(document).ready ->
     app.collections.todos = new Todos()
 
     app.controllers.main = new MainController()
+
     app.views.home = new HomeView()
     app.views.newTodo = new NewTodoView()
     app.views.todos = new TodosView()

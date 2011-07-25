@@ -1,5 +1,5 @@
-TodoView = require('views/todo_view').TodoView
-todosTemplate = require('templates/todos')
+TodoView = require('views/todos/todo').TodoView
+todosTemplate = require('templates/todos/todos')
 
 class exports.TodosView extends Backbone.View
 

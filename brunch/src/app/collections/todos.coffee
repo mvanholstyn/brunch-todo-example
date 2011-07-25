@@ -1,4 +1,4 @@
-Todo = require('models/todo_model').Todo
+Todo = require('models/todo').Todo
 
 class exports.Todos extends Backbone.Collection
 

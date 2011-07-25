@@ -1,4 +1,4 @@
-todoTemplate = require('templates/todo')
+todoTemplate = require('templates/todos/todo')
 
 class exports.TodoView extends Backbone.View
 
