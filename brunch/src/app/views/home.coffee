@@ -6,7 +6,7 @@ class exports.HomeView extends Backbone.View
 
   render: ->
     @$(@el).html homeTemplate()
-    @$(@el).find('#todo-app').append app.views.newTodo.render().el
-    @$(@el).find('#todo-app').append app.views.todos.render().el
-    @$(@el).find('#todo-app').append app.views.stats.render().el
+    @$(@el).find('#todo-app').append app.views.todos._new.render().el
+    @$(@el).find('#todo-app').append app.views.todos.all.render().el
+    @$(@el).find('#todo-app').append app.views.todos.stats.render().el
     @

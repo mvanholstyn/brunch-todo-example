@@ -1,7 +1,7 @@
 TodoView = require('views/todos/todo').TodoView
 todosTemplate = require('templates/todos/todos')
 
-class exports.TodosView extends Backbone.View
+class exports.TodosDoneView extends Backbone.View
 
   id: 'todos-view'
 
@@ -20,7 +20,7 @@ class exports.TodosView extends Backbone.View
 
   addAll: =>
     # TODO explain why this is working - see underscore source
-    app.collections.todos.each @addOne
+    app.collections.todos.done().each @addOne
 
   renderStats: =>
-    app.views.stats.render()
+    app.views.todos.stats.render()

@@ -1,7 +1,17 @@
 class exports.MainController extends Backbone.Controller
   routes :
-    "home": "home"
+    "all": "all",
+    "done": "done"
+    "undone": "undone"
 
-  home: ->
+  all: ->
+    app.views.home.render()
+    app.collections.todos.fetch()
+  
+  done: ->
+    app.views.home.render()
+    app.collections.todos.fetch()
+  
+  undone: ->
     app.views.home.render()
     app.collections.todos.fetch()
